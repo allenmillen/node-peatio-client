@@ -1,0 +1,35 @@
+{
+  "name": "peatio-client",
+  "version": "0.0.1",
+  "description": "Unofficial node.js Peatio client",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allenmillen/node-peatio-client.git"
+  },
+  "keywords": [
+    "peatio",
+    "client",
+    "unofficial"
+  ],
+  "author": "allen millen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/allenmillen/node-peatio-client/issues"
+  },
+  "homepage": "https://github.com/allenmillen/node-peatio-client#readme",
+  "dependencies": {
+    "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.0.1",
+    "sinon": "^4.4.2"
+  }
+}

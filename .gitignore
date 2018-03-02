@@ -57,3 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+# WebStorm IDE filesf
+.idea/
+
+# Temp NPM file
+package-lock.json
