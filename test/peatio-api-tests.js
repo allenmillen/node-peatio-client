@@ -6,7 +6,7 @@ describe("peatio-api tests", function() {
 
   it("payload constructed", function() {
     var p = api.v4t.payload("GET", "members/me", {p1: "v1"});
-    expect(p).to.be.equal("GET|/api/v2/members/me|p1=v1&")
+    expect(p).to.be.equal("GET|/api/v2/members/me|p1=v1")
   });
 
   it("signature calculated", function() {
