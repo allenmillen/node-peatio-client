@@ -12,7 +12,7 @@ So i have to come up with this one
 For now the following features are implemented
 - generic HTTP get (with native promises)
 - auth by access key & secrets
-- get_md = HTTP GET /depth?market=<pair>
+- get_md = HTTP GET /depth?market=btcusd
 - get_balances = HTTP GET /members/me (requires auth)
 
 Enjoy! Allen
