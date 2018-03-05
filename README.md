@@ -10,6 +10,8 @@ Official Peatio client (aka peatio-sdk) has few drawbacks
 So i have to come up with this one
 
 For now the following features are implemented
-- ...
+- generic HTTP get
+- get_md = HTTP GET /depth
+- get_balances = HTTP GET /members/me (requires auth)
 
 Enjoy! Allen
