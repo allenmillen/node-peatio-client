@@ -1,6 +1,6 @@
 {
   "name": "peatio-client",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Unofficial node.js Peatio client",
   "main": "index.js",
   "directories": {

@@ -2,7 +2,7 @@ const api = require("..")({});
 const expect = require("chai").expect;
 
 
-describe("peatio-api tests", function() {
+describe("peatio-api unit tests", function() {
 
   it("payload constructed", function() {
     var p = api.v4t.payload("GET", "members/me", {p1: "v1"});
