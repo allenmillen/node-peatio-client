@@ -41,6 +41,14 @@ module.exports = function(opts) {
     cancel_order: cancel_order,
     cancel_all_orders: cancel_all_orders,
 
+    get_deposits: get_deposits,
+    get_deposit: get_deposit,
+
+    withdraw: withdraw,
+    get_withdrawals: get_withdrawals,
+    get_withdrawal_addresses: get_withdrawal_addresses,
+
+
     v4t: impl
   };
 
@@ -63,6 +71,58 @@ module.exports = function(opts) {
   function get_orders(params) {
     return impl.get_private("orders", params)
   }
+
+
+  function get_deposit(txid) {
+    return impl.get_private("deposit", {txid: txid})
+  }
+
+  // [
+  // {"id":3,"currency":"btc","amount":"1.3","fee":"0.0",
+  // "txid":"db0f9d19e0273c1cd583484724c598fa74e2390fabd55417db1161097344df5f","created_at":"2018-02-27T16:42:00+01:00",
+  // "confirmations":"3","done_at":null,"state":"accepted"},
+  // ...
+  // ]
+  function get_deposits(params) {
+    // currency, limit, state
+    return impl.get_private("deposits", params)
+  }
+
+
+  // [
+  // {"id":16,"currency":"BTC","amount":"0.02233","fee":"0.0005",
+  // "txid":"5481c513b39b7028ae32cf07154fb849caaef187db98426d907bbcf553a35a28",
+  // "address":"2NDvGRRMQyGKFHbrdqYNnsC5Q4pqyzKhyVy","state":"submitted","created_at":"2018-03-15T15:20:54+01:00",
+  // "updated_at":"2018-03-15T15:21:05+01:00","done_at":"2018-03-15T15:21:05+01:00"},
+  // ...
+  // ]
+  function get_withdrawals(params) {
+    return impl.get_private("withdraws", params)
+  }
+
+
+  // [
+  // {"id":1,"currency":"BTC","label":"TestBitGoBtc","address":"2NDvGRRMQyGKFHbrdqYNnsC5Q4pqyzKhyVy"},
+  // ...
+  // ]
+  function get_withdrawal_addresses(params) {
+    return impl.get_private("withdraws/addresses", params)
+  }
+
+
+  // it resubmits request to /widthraws/satoshis
+  //
+  // good answer
+  // {"id":17,"currency":"BTC","amount":"0.01256","fee":"0.0005","txid":null,
+  // "address":"2NDvGRRMQyGKFHbrdqYNnsC5Q4pqyzKhyVy","state":"submitted","created_at":"2018-03-15T16:04:08+01:00",
+  // "updated_at":"2018-03-15T16:04:29+01:00","done_at":null}
+  // error answer
+  // {"errors":["Account balance is insufficient"]}
+  function withdraw(params) {
+    //console.log("widthraw() called with params: " + JSON.stringify(params));
+    return impl.exec_private("POST", "withdraws", params)
+  }
+
 
   function place_order(params) {
     return impl.exec_private("POST", "orders", params)
@@ -87,6 +147,9 @@ module.exports = function(opts) {
       var req_url = impl.url(path, params, query_params_str);
       //console.log("u=" + req_url);
       impl.request({uri: req_url, method: method}, function(error, response, body) {
+        //console.log("exec_req() error=" + error);
+        //console.log("exec_req() response=" + JSON.stringify(response));
+        //console.log("exec_req() body=" + body);
         if (error) reject(error);
         else resolve(body)
       });
@@ -113,6 +176,7 @@ module.exports = function(opts) {
 
 
   function exec_private(method, path, query_params, tonce) {
+    //console.log("exec_private() called!")
     var params = query_params || {};
 
     params["tonce"] = tonce || Date.now();
